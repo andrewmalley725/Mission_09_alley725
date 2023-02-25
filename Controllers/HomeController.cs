@@ -13,18 +13,18 @@ namespace Mission_09_alley725.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        private BookstoreContext _db;
+        private IBookstoreRepository _repo { get; set; }
 
-        public HomeController(ILogger<HomeController> logger, BookstoreContext db)
+        public HomeController(ILogger<HomeController> logger, IBookstoreRepository repo)
         {
             _logger = logger;
 
-            _db = db;
+            _repo = repo;
         }
 
         public IActionResult Index()
         {
-            var data = _db.Books.ToList();
+            var data = _repo.Books.ToList();
 
             return View(data);
         }

@@ -31,6 +31,8 @@ namespace Mission_09_alley725
             {
                 options.UseSqlite(Configuration["ConnectionStrings:BookConnection"]);
             });
+
+            services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
