@@ -50,6 +50,13 @@ namespace Mission_09_alley725.Controllers
             return View(data);
         }
 
+        public IActionResult BookInfo(int bookID)
+        {
+            var book = _repo.Books.FirstOrDefault(x => x.BookId == bookID);
+
+            return View(book);
+        }
+
         public IActionResult Privacy()
         {
             return View();

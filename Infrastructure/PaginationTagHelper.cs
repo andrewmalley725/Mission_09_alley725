@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -26,7 +27,12 @@ namespace Mission_09_alley725.Infrastructure
 
 		public string PageAction { get; set; }
 
-		public override void Process(TagHelperContext thc, TagHelperOutput tho)
+        public bool PageClassesEnabled { get; set; } = false;
+        public string PageClass { get; set; }
+        public string PageClassNormal { get; set; }
+        public string PageClassSelected { get; set; }
+
+        public override void Process(TagHelperContext thc, TagHelperOutput tho)
 		{
 			IUrlHelper url = _uhf.GetUrlHelper(vc);
 
@@ -37,7 +43,13 @@ namespace Mission_09_alley725.Infrastructure
 				TagBuilder tb = new TagBuilder("a");
 
 				tb.Attributes["href"] = url.Action(PageAction, new { pageNum = i });
-				tb.InnerHtml.Append(i.ToString());
+                if (PageClassesEnabled)
+                {
+                    tb.AddCssClass(PageClass);
+                    tb.AddCssClass(i == PageInfo.CurrentPage
+                        ? PageClassSelected : PageClassNormal);
+                }
+                tb.InnerHtml.Append(i.ToString());
 
 				final.InnerHtml.AppendHtml(tb);
 			}

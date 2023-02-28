@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "My Books";
     
 }
 
@@ -7,36 +7,11 @@
 
 
 <div>
-    <h1>My Books</h1>
-
-    <table class="table-light table-striped">
-
-        <thead>
-            <tr>
-                @foreach (string head in ViewBag.Headers)
-                {
-                    <td>@head</td>
-                }
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (Book book in Model.Books)
-            {
-                <tr>
-                    <td>@book.Title</td>
-                    <td>@book.Author</td>
-                    <td>@book.Publisher</td>
-                    <td>@book.Isbn</td>
-                    <td>@book.Classification</td>
-                    <td>@book.Category</td>
-                    <td>@book.PageCount</td>
-                    <td>@book.Price</td>
-                </tr>
-            }
-
-        </tbody>
-    </table>
+    @foreach (var p in Model.Books)
+    {
+        <partial name="BookSummary" model="p" />
+    }
+</div>
 
     @*@if (Model.PageInfo.CurrentPage < Model.PageInfo.TotalPages)
         {
@@ -57,5 +32,7 @@
 
     <br/>
     <p>Page @Model.PageInfo.CurrentPage of @Model.PageInfo.TotalPages</p>
-    <div page-info="@Model.PageInfo" page-action="Index"></div>
-</div>
+    <div page-info="@Model.PageInfo" page-action="Index" page-classes-enabled="true"
+         page-class="btn" page-class-normal="btn-outline-dark"
+         page-class-selected="btn-primary" class="btn-group pull-right m-1">
+    </div>
