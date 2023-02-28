@@ -9,7 +9,7 @@
 <div>
     <h1>My Books</h1>
 
-    <table>
+    <table class="table-light table-striped">
 
         <thead>
             <tr>
@@ -39,23 +39,23 @@
     </table>
 
     @*@if (Model.PageInfo.CurrentPage < Model.PageInfo.TotalPages)
-    {
-        <a asp-controller="Home" asp-action="Index" asp-route-pageNum="@Model.PageInfo.NextPage">Next Page</a>
-    }
+        {
+            <a asp-controller="Home" asp-action="Index" asp-route-pageNum="@Model.PageInfo.NextPage">Next Page</a>
+        }
 
-    @if (Model.PageInfo.CurrentPage < Model.PageInfo.TotalPages && Model.PageInfo.CurrentPage > 1)
-    {
-        <a asp-controller="Home" asp-action="Index" asp-route-pageNum="@Model.PageInfo.NextPage">Next Page</a>
-        <a asp-controller="Home" asp-action="Index" asp-route-pageNum="@ViewBag.Previous">Previous Page</a>
-    }
+        @if (Model.PageInfo.CurrentPage < Model.PageInfo.TotalPages && Model.PageInfo.CurrentPage > 1)
+        {
+            <a asp-controller="Home" asp-action="Index" asp-route-pageNum="@Model.PageInfo.NextPage">Next Page</a>
+            <a asp-controller="Home" asp-action="Index" asp-route-pageNum="@ViewBag.Previous">Previous Page</a>
+        }
 
-    @if (Model.PageInfo.CurrentPage == Model.PageInfo.TotalPages)
-    {
-        <a asp-controller="Home" asp-action="Index" asp-route-pageNum="@ViewBag.Previous">Previous Page</a>
-    }*@
-
-
+        @if (Model.PageInfo.CurrentPage == Model.PageInfo.TotalPages)
+        {
+            <a asp-controller="Home" asp-action="Index" asp-route-pageNum="@ViewBag.Previous">Previous Page</a>
+        }*@
 
 
+    <br/>
+    <p>Page @Model.PageInfo.CurrentPage of @Model.PageInfo.TotalPages</p>
     <div page-info="@Model.PageInfo" page-action="Index"></div>
 </div>
