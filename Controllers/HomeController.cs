@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Mission_09_alley725.Models;
+using Mission_09_alley725.Models.ViewModels;
 
 namespace Mission_09_alley725.Controllers
 {
@@ -22,9 +23,29 @@ namespace Mission_09_alley725.Controllers
             _repo = repo;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pageNum = 1)
         {
-            var data = _repo.Books.ToList();
+
+            int pageSize = 10;
+
+            var data = new BookViewModel
+            {
+                Books = _repo.Books
+                            .OrderBy(x => x.Title)
+                            .Skip((pageNum - 1) * pageSize)
+                            .Take(pageSize),
+
+                PageInfo = new PageInfo
+                {
+                    NumBooks = _repo.Books.Count(),
+                    CurrentPage = pageNum,
+                    PageSize = pageSize
+                }
+            };
+
+            ViewBag.Previous = data.PageInfo.CurrentPage - 1;
+
+            ViewBag.Headers = new List<string> { "Title", "Author", "Publisher", "ISBN", "Classification", "Category", "Page Count", "Price"};
 
             return View(data);
         }

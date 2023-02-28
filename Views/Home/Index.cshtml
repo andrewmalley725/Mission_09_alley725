@@ -1,15 +1,61 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    
 }
 
-@model List<Book>
+@model BookViewModel
 
 
 <div>
     <h1>My Books</h1>
 
-    @foreach (Book book in Model)
+    <table>
+
+        <thead>
+            <tr>
+                @foreach (string head in ViewBag.Headers)
+                {
+                    <td>@head</td>
+                }
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (Book book in Model.Books)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@book.Publisher</td>
+                    <td>@book.Isbn</td>
+                    <td>@book.Classification</td>
+                    <td>@book.Category</td>
+                    <td>@book.PageCount</td>
+                    <td>@book.Price</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+    @*@if (Model.PageInfo.CurrentPage < Model.PageInfo.TotalPages)
     {
-        <h3>@book.Title</h3>
+        <a asp-controller="Home" asp-action="Index" asp-route-pageNum="@Model.PageInfo.NextPage">Next Page</a>
     }
+
+    @if (Model.PageInfo.CurrentPage < Model.PageInfo.TotalPages && Model.PageInfo.CurrentPage > 1)
+    {
+        <a asp-controller="Home" asp-action="Index" asp-route-pageNum="@Model.PageInfo.NextPage">Next Page</a>
+        <a asp-controller="Home" asp-action="Index" asp-route-pageNum="@ViewBag.Previous">Previous Page</a>
+    }
+
+    @if (Model.PageInfo.CurrentPage == Model.PageInfo.TotalPages)
+    {
+        <a asp-controller="Home" asp-action="Index" asp-route-pageNum="@ViewBag.Previous">Previous Page</a>
+    }*@
+
+
+
+
+    <div page-info="@Model.PageInfo" page-action="Index"></div>
 </div>
