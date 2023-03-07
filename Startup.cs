@@ -33,6 +33,10 @@ namespace Mission_09_alley725
             });
 
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
+
+            services.AddRazorPages();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,16 +54,37 @@ namespace Mission_09_alley725
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+               // endpoints.MapControllerRoute(
+               //name: "BookInfo",
+               //pattern: "{controller=Home}/{action=BookInfo}");
+
+                endpoints.MapControllerRoute(
+                    name: "Pages",
+                    pattern: "{controller=Home}/{action=Index}/Page{pageNum}"
+                    );
+
+                endpoints.MapControllerRoute(
+                    name: "Category",
+                    pattern: "{controller=Home}/{action=Index}/{category}"
+                    );
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "Category&Page",
+                    pattern: "{controller=Home}/{action=Index}/{category}/Page{pageNum}"
+                    );
+
+                endpoints.MapRazorPages();
             });
         }
     }

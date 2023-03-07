@@ -1,0 +1,34 @@
+﻿@page
+@model Mission_09_alley725.Pages.CartModel
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Book Title</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.MyCart.Books)
+        {
+            <tr>
+                <td>@item.book.Title</td>
+                <td>@item.book.Author</td>
+                <td>@item.book.Category</td>
+                <td>@item.quantity</td>
+                <td>$@item.book.Price</td>
+            </tr>
+        }
+        <tr>
+            <td>Subtotal</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>$@Model.MyCart.getSubtotal().ToString("c")</td>
+        </tr>
+    </tbody>
+</table>
