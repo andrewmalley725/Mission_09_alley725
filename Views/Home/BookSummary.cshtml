@@ -17,7 +17,7 @@
     <div class="float-end" style="margin-left:90%;">
         <form method="post" asp-page="/Cart">
             <input type="hidden" asp-for="@Model.BookId" />
-            Quantity: <input type="number" name="quantity" value="1" style="width: 50px;"/><br /><br />
+            Quantity: <input type="number" name="quantity" value="1" min="1" max="10" style="width: 50px;"/><br /><br />
             <button type="submit" class="btn btn-primary btn-sm">Add to Cart</button>
         </form>
     </div>

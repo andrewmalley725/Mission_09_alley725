@@ -1,7 +1,11 @@
 ﻿@page
 @model Mission_09_alley725.Pages.CartModel
 
+@{
+    ViewData["Title"] = "My Cart";
+}
 
+<h1> My Cart</h1>
 <table class="table table-striped table-hover">
     <thead>
         <tr>
@@ -27,8 +31,8 @@
             <td>Subtotal</td>
             <td></td>
             <td></td>
-            <td></td>
-            <td>$@Model.MyCart.getSubtotal()</td>
+            <td>@Model.MyCart.getNumItems()</td>
+            <td>$@Math.Round((Double)Model.MyCart.getSubtotal(), 2)</td>
         </tr>
     </tbody>
 </table>

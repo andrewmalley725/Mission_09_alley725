@@ -37,6 +37,30 @@ namespace Mission_09_alley725.Models
 			this.Books.Add(b);
 		}
 
+		public List<string> getBooks()
+		{
+			List<string> books = new List<string>();
+
+			foreach (LineItem li in this.Books)
+			{
+				books.Add(li.book.Title);
+			}
+
+			return books;
+		}
+
+		public LineItem findBook(string book)
+		{
+			foreach (LineItem li in this.Books)
+			{
+				if (li.book.Title == book)
+				{
+					return li;
+				}
+			}
+            return this.Books[0];
+        }
+
 	}
 
 	public class LineItem
@@ -45,7 +69,5 @@ namespace Mission_09_alley725.Models
 		public Book book { get; set; }
 	}
 
-		
-	
 }
 

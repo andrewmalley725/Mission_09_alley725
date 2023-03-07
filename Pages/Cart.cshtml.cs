@@ -36,7 +36,15 @@ namespace Mission_09_alley725.Pages
 
             var item = new LineItem { book = book, quantity = Quantity };
 
-            MyCart.addBook(item);
+            if (MyCart.getBooks().Contains(item.book.Title))
+            {
+                MyCart.findBook(item.book.Title).quantity += item.quantity;
+            }
+
+            else
+            {
+                MyCart.addBook(item);
+            }
 
             HttpContext.Session.SetJson("cart", MyCart);
 
