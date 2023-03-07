@@ -71,6 +71,11 @@ namespace Mission_09_alley725
                     );
 
                 endpoints.MapControllerRoute(
+                    name: "Category&Page",
+                    pattern: "{controller=Home}/{action=Index}/Page{pageNum}/{category}"
+                    );
+
+                endpoints.MapControllerRoute(
                     name: "Category",
                     pattern: "{controller=Home}/{action=Index}/{category}"
                     );
@@ -79,10 +84,7 @@ namespace Mission_09_alley725
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-                endpoints.MapControllerRoute(
-                    name: "Category&Page",
-                    pattern: "{controller=Home}/{action=Index}/{category}/Page{pageNum}"
-                    );
+                
 
                 endpoints.MapRazorPages();
             });

@@ -14,9 +14,11 @@
         </div>
         <div class="card-text p-1">@Model.Author</div>
     </a>
-    <form method="post" asp-page="/Cart">
-        <input type="hidden" asp-for="@Model.BookId"/>
-        <input type="number" value="1"/>
-        <button type="submit">Add to Cart</button>
-    </form>
+    <div class="float-end" style="margin-left:90%;">
+        <form method="post" asp-page="/Cart">
+            <input type="hidden" asp-for="@Model.BookId" />
+            Quantity: <input type="number" name="quantity" value="1" style="width: 50px;"/><br /><br />
+            <button type="submit" class="btn btn-primary btn-sm">Add to Cart</button>
+        </form>
+    </div>
 </div>
