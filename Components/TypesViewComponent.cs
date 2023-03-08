@@ -16,8 +16,12 @@ namespace Mission_09_alley725.Components
 
 		public IViewComponentResult Invoke()
 		{
+			ViewBag.SelectedCat = RouteData?.Values["category"];
 
-			var categories = _repo.Books
+			Console.WriteLine(RouteData.Values["category"]);
+
+
+            var categories = _repo.Books
 				.Select(x => x.Category)
 				.Distinct()
 				.OrderBy(x => x);

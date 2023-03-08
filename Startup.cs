@@ -61,9 +61,13 @@ namespace Mission_09_alley725
 
             app.UseEndpoints(endpoints =>
             {
-               // endpoints.MapControllerRoute(
-               //name: "BookInfo",
-               //pattern: "{controller=Home}/{action=BookInfo}");
+                
+
+
+                endpoints.MapControllerRoute(
+                    name: "Category",
+                    pattern: "{controller=Home}/{action=Index}/{category}/{pageNum}"
+                    );
 
                 endpoints.MapControllerRoute(
                     name: "Pages",
@@ -71,14 +75,13 @@ namespace Mission_09_alley725
                     );
 
                 endpoints.MapControllerRoute(
-                    name: "Category&Page",
-                    pattern: "{controller=Home}/{action=Index}/Page{pageNum}/{category}"
-                    );
+                   name: "BookInfo",
+                   pattern: "{controller=Home}/{action=BookInfo}/{bookId}");
 
-                endpoints.MapControllerRoute(
-                    name: "Category",
-                    pattern: "{controller=Home}/{action=Index}/{category}"
-                    );
+                //endpoints.MapControllerRoute(
+                //    name: "Category&Page",
+                //    pattern: "{controller=Home}/{action=Index}/Page{pageNum}/{category}"
+                //    );
 
                 endpoints.MapControllerRoute(
                     name: "default",

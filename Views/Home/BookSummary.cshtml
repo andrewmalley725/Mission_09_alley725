@@ -2,6 +2,12 @@
 
 @model Book
 
+<style>
+    a:hover {
+        text-decoration: none;
+    }
+</style>
+
 <div class="card card-outline-primary m-1 p-1">
     <a asp-action="BookInfo" asp-route-bookID="@Model.BookId">
         <div class="bg-faded p-1">
@@ -17,6 +23,7 @@
     <div class="float-end" style="margin-left:90%;">
         <form method="post" asp-page="/Cart">
             <input type="hidden" asp-for="@Model.BookId" />
+            <input type="hidden" name="returnURL" value="@ViewContext.HttpContext.Request.PathAndQuery()"/>
             Quantity: <input type="number" name="quantity" value="1" min="1" max="10" style="width: 50px;"/><br /><br />
             <button type="submit" class="btn btn-primary btn-sm">Add to Cart</button>
         </form>

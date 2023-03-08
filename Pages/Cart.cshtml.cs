@@ -23,12 +23,16 @@ namespace Mission_09_alley725.Pages
         [BindProperty]
         public int Quantity { get; set; }
 
-        public void OnGet()
+        public string ReturnUrl { get; set; }
+
+        public void OnGet(string returnURL)
         {
+            ReturnUrl = returnURL ?? "/";
+
             MyCart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
         }
 
-        public IActionResult OnPost(int bookid)
+        public IActionResult OnPost(int bookid, string returnURL)
         {
             Book book = _repo.Books.FirstOrDefault(x => x.BookId == bookid);
 
@@ -48,7 +52,7 @@ namespace Mission_09_alley725.Pages
 
             HttpContext.Session.SetJson("cart", MyCart);
 
-            return RedirectToPage(MyCart);
+            return RedirectToPage(new { ReturnUrl = returnURL });
         }
     }
 }
