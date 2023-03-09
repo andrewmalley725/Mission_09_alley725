@@ -3,10 +3,20 @@
 }
 
 @model IEnumerable<string>
-<h2>Filter by category: </h2><br />
-<a asp-controller="Home" asp-action="Index" asp-route-category="" class="btn btn-outline-secondary">View all Books</a><br /><br />
-@foreach (string cat in Model)
-{
-        <a asp-controller="Home" asp-action="Index" asp-route-category="@cat" asp-route-pageNum="1" class="btn @(ViewBag.SelectedCat == cat ? "btn-primary" : "btn-outline-secondary")">@cat</a><br/><br />
-}
 
+@*bootstrapped dropdown menu not covered in book*@
+<div class="dropdown container-fluid">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Filter by Category
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a asp-controller="Home" asp-action="Index" asp-route-category="" class="dropdown-item">View all Books</a>
+
+        @foreach (string cat in Model)
+        {
+            <a asp-controller="Home" asp-action="Index" asp-route-category="@cat" asp-route-pageNum="1" class="dropdown-item">@cat</a>
+        }
+    </div>
+</div>
+<br />
+<h4>Showing @(ViewBag.SelectedCat ?? "all") books</h4>
