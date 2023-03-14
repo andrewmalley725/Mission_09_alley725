@@ -13,12 +13,13 @@ namespace Mission_09_alley725.Pages
     {
         private IBookstoreRepository _repo;
 
-        public CartModel(IBookstoreRepository temp)
+        public Cart MyCart { get; set; }
+
+        public CartModel(IBookstoreRepository temp, Cart c)
         {
             _repo = temp;
+            MyCart = c;
         }
-
-        public Cart MyCart { get; set; }
 
         [BindProperty]
         public int Quantity { get; set; }
@@ -29,14 +30,14 @@ namespace Mission_09_alley725.Pages
         {
             ReturnUrl = returnURL ?? "/";
 
-            MyCart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
+            
         }
 
         public IActionResult OnPost(int bookid, string returnURL)
         {
             Book book = _repo.Books.FirstOrDefault(x => x.BookId == bookid);
 
-            MyCart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
+            
 
             var item = new LineItem { book = book, quantity = Quantity };
 
@@ -50,9 +51,16 @@ namespace Mission_09_alley725.Pages
                 MyCart.addBook(item);
             }
 
-            HttpContext.Session.SetJson("cart", MyCart);
+            
 
             return RedirectToPage(new { ReturnUrl = returnURL });
+        }
+
+        public IActionResult OnPostRemove(int bookId, string returnUrl)
+        {
+            MyCart.removeBook(MyCart.Books.First(x => x.book.BookId == bookId));
+
+            return RedirectToPage(new { ReturnUrl = returnUrl });
         }
     }
 }

@@ -32,10 +32,22 @@ namespace Mission_09_alley725.Models
 			return total;
 		}
 
-		public void addBook(LineItem b)
+		public virtual void addBook(LineItem b)
 		{
 			this.Books.Add(b);
 		}
+
+		public virtual void removeBook(LineItem b)
+		{
+			this.Books.RemoveAll(x => x.book.BookId == b.book.BookId);
+		}
+
+		public virtual void emptyCart()
+		{
+			this.Books.Clear();
+		}
+
+
 
 		public List<string> getBooks()
 		{
