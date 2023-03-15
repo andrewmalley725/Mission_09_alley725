@@ -34,6 +34,7 @@ namespace Mission_09_alley725
             });
 
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
+            services.AddScoped<ICheckoutRepository, EFCheckoutRepository>();
 
             services.AddRazorPages();
             services.AddDistributedMemoryCache();

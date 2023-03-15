@@ -29,8 +29,6 @@ namespace Mission_09_alley725.Pages
         public void OnGet(string returnURL)
         {
             ReturnUrl = returnURL ?? "/";
-
-            
         }
 
         public IActionResult OnPost(int bookid, string returnURL)

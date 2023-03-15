@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Mission_09_alley725.Models
@@ -77,6 +78,8 @@ namespace Mission_09_alley725.Models
 
 	public class LineItem
 	{
+		[Key]
+		public int LineItemID { get; set; }
 		public int quantity { get; set; }
 		public Book book { get; set; }
 	}

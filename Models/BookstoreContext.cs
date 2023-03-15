@@ -20,6 +20,8 @@ namespace Mission_09_alley725.Models
         }
 
         public virtual DbSet<Book> Books { get; set; }
+
+        public virtual DbSet<Checkout> CheckoutInfo { get; set; }
     }
         
 }
